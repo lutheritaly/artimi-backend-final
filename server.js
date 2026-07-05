@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.json());
 
 // This will catch requests to BOTH /api/interact AND just /interact
-app.post(['/api/interact', '/interact'], async (req, res) => {
+app.post('*', async (req, res) => {
   try {
     const { artifactId, code, userInput, lang = 'IT' } = req.body;
     const targetLang = lang.toUpperCase();
