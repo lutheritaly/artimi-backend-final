@@ -10,7 +10,10 @@ app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
 
 // Main entry point for the keypad
-app.post('/api/interact', async (req, res) => {
+app.use(express.json());
+
+// This will catch requests to BOTH /api/interact AND just /interact
+app.post(['/api/interact', '/interact'], async (req, res) => {
   try {
     const { artifactId, code, userInput, lang = 'IT' } = req.body;
     const targetLang = lang.toUpperCase();
